@@ -35,32 +35,6 @@ class SuperEmbeds:
             Estare dando noticias muy importante sobre el mundo de Roblox y leaks cada dia!\n
             Quieres escuchar musica? Unete a un canal y comienza a reproducir canciones con el comando `/play`\n
             Puedes ver la lista completa de comandos utilizando `/help`""")
-    
-    def refer_game(self, game):
-
-        totalvotes = int(game['upvotes']) + int(game['downvotes'])
-        up_percentage = (int(game['upvotes']) / totalvotes) * 100
-        votes = (up_percentage / 100) * 10
-
-        rating_message = ":thumbsup: "
-
-        for i in range(0, 10):
-            if i < int(votes):
-                rating_message += ':green_square:'
-            else:
-                rating_message += ':red_square:'
-
-        rating_message += f' :thumbsdown: ({int(up_percentage)}%)'
-
-        embed = discord.Embed(title=game['name'], description=game['description'][:123]+'...', url=game['url'], colour=self.get_default_color())
-        embed.add_field(name=" ", value=" ", inline=False)
-        embed.add_field(name=":bust_in_silhouette: Jugando", value="{:,d}".format(int(game['playing'])))
-        embed.add_field(name=":star: Favoritos", value="{:,d}".format(int(game['favorites'])))
-        embed.add_field(name=" ", value=" ", inline=False)
-        embed.add_field(name="Rating", value=f"{rating_message}")
-        embed.set_author(name=game['author'], url=game['author_url'])
-        embed.set_image(url=game['thumbnail_url'])
-        return embed
 
     def announce(self, description: str):
         return discord.Embed(title="Anuncio importante!", description=description, colour=self.get_default_color())
